@@ -12,6 +12,7 @@
             --light-color: #ffe6f2;
             --text-color: #333;
             --white: #ffffff;
+            --admin-color: #4a148c;
         }
         
         * {
@@ -33,6 +34,7 @@
             padding: 1rem 0;
             text-align: center;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: relative;
         }
         
         .logo {
@@ -44,6 +46,18 @@
         .slogan {
             font-style: italic;
             font-size: 0.9rem;
+        }
+        
+        .admin-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: var(--admin-color);
+            color: white;
+            padding: 0.3rem 0.6rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            cursor: pointer;
         }
         
         nav {
@@ -137,6 +151,14 @@
             box-shadow: 0 4px 8px rgba(0,0,0,0.2);
         }
         
+        .btn-admin {
+            background-color: var(--admin-color);
+        }
+        
+        .btn-admin:hover {
+            background-color: #7b1fa2;
+        }
+        
         .container {
             max-width: 1200px;
             margin: 2rem auto;
@@ -175,11 +197,24 @@
             overflow: hidden;
             box-shadow: 0 3px 10px rgba(0,0,0,0.1);
             transition: all 0.3s ease;
+            position: relative;
         }
         
         .product-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .product-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: var(--dark-color);
+            color: white;
+            padding: 0.3rem 0.6rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            z-index: 2;
         }
         
         .product-image {
@@ -213,6 +248,13 @@
             font-weight: 700;
             color: var(--primary-color);
             margin-bottom: 1rem;
+        }
+        
+        .product-old-price {
+            text-decoration: line-through;
+            color: #999;
+            font-size: 1rem;
+            margin-right: 0.5rem;
         }
         
         .product-description {
@@ -303,6 +345,126 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.3);
         }
         
+        /* Modal e Área Admin */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            z-index: 1000;
+            overflow-y: auto;
+        }
+        
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 2rem;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 800px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+        }
+        
+        .close-modal {
+            float: right;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        .admin-panel {
+            margin-top: 2rem;
+        }
+        
+        .admin-section {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .admin-section h3 {
+            color: var(--admin-color);
+            margin-bottom: 1rem;
+            border-bottom: 2px solid var(--admin-color);
+            padding-bottom: 0.5rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: inherit;
+        }
+        
+        textarea.form-control {
+            min-height: 100px;
+        }
+        
+        .product-list {
+            list-style: none;
+        }
+        
+        .product-list-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .product-list-item:last-child {
+            border-bottom: none;
+        }
+        
+        .product-list-actions button {
+            margin-left: 0.5rem;
+            padding: 0.3rem 0.6rem;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        
+        .btn-edit {
+            background-color: #2196F3;
+            color: white;
+        }
+        
+        .btn-delete {
+            background-color: #f44336;
+            color: white;
+        }
+        
+        .promo-banner {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            border-radius: 5px;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+        
         @media (max-width: 768px) {
             nav ul {
                 flex-direction: column;
@@ -320,6 +482,12 @@
             .products {
                 grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
             }
+            
+            .modal-content {
+                margin: 2% auto;
+                width: 95%;
+                padding: 1rem;
+            }
         }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -329,6 +497,7 @@
     <header>
         <div class="logo">Lovelly Closet</div>
         <div class="slogan">Conforto e elegância para você</div>
+        <div class="admin-badge" id="adminBadge"><i class="fas fa-lock"></i> Área Admin</div>
     </header>
     
     <nav>
@@ -340,10 +509,15 @@
         </ul>
     </nav>
     
+    <!-- Banner de Promoção -->
+    <div id="promoBanner" class="promo-banner" style="display: none;">
+        <h3 id="promoText"></h3>
+    </div>
+    
     <section class="hero" id="home">
         <div class="hero-content">
-            <h1>Coleção Primavera/Verão 2023</h1>
-            <p>Descubra as peças mais confortáveis e sensuais para realçar sua beleza</p>
+            <h1 id="heroTitle">Coleção Primavera/Verão 2023</h1>
+            <p id="heroSubtitle">Descubra as peças mais confortáveis e sensuais para realçar sua beleza</p>
             <a href="#products" class="btn">Ver Coleção</a>
         </div>
     </section>
@@ -352,134 +526,16 @@
         <section id="products">
             <h2 class="section-title">Nossos Produtos</h2>
             
-            <div class="products">
-                <!-- Produto 1 -->
-                <div class="product-card">
-                    <div class="product-image">
-                        <img src="https://images.unsplash.com/photo-1591348278863-a8fb3887e2aa?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Calcinha rendada">
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-title">Calcinha Renda Florais</h3>
-                        <div class="product-price">R$ 39,90</div>
-                        <p class="product-description">Calcinha em renda com detalhes florais, extremamente confortável e sensual.</p>
-                        
-                        <div class="product-sizes">
-                            <span class="size-option">P</span>
-                            <span class="size-option">M</span>
-                            <span class="size-option selected">G</span>
-                            <span class="size-option">GG</span>
-                        </div>
-                        
-                        <button class="btn btn-buy" onclick="buyProduct('Calcinha Renda Florais', 39.90)">Comprar</button>
-                    </div>
-                </div>
-                
-                <!-- Produto 2 -->
-                <div class="product-card">
-                    <div class="product-image">
-                        <img src="https://images.unsplash.com/photo-1585487000160-6ebcfceb0d03?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Sutiã com bojo">
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-title">Sutiã com Bojo</h3>
-                        <div class="product-price">R$ 69,90</div>
-                        <p class="product-description">Sutiã com bojo e alças ajustáveis, proporcionando conforto e sustentação.</p>
-                        
-                        <div class="product-sizes">
-                            <span class="size-option">34</span>
-                            <span class="size-option selected">36</span>
-                            <span class="size-option">38</span>
-                            <span class="size-option">40</span>
-                        </div>
-                        
-                        <button class="btn btn-buy" onclick="buyProduct('Sutiã com Bojo', 69.90)">Comprar</button>
-                    </div>
-                </div>
-                
-                <!-- Produto 3 -->
-                <div class="product-card">
-                    <div class="product-image">
-                        <img src="https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Conjunto lingerie">
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-title">Conjunto Sensual</h3>
-                        <div class="product-price">R$ 119,90</div>
-                        <p class="product-description">Conjunto completo com sutiã e calcinha em renda, perfeito para ocasiões especiais.</p>
-                        
-                        <div class="product-sizes">
-                            <span class="size-option">P</span>
-                            <span class="size-option selected">M</span>
-                            <span class="size-option">G</span>
-                        </div>
-                        
-                        <button class="btn btn-buy" onclick="buyProduct('Conjunto Sensual', 119.90)">Comprar</button>
-                    </div>
-                </div>
-                
-                <!-- Produto 4 -->
-                <div class="product-card">
-                    <div class="product-image">
-                        <img src="https://images.unsplash.com/photo-1551845041-5f0a5b5a0c9a?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Body rendado">
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-title">Body Renda Transpassado</h3>
-                        <div class="product-price">R$ 89,90</div>
-                        <p class="product-description">Body em renda com detalhes transpassados, modelador e extremamente confortável.</p>
-                        
-                        <div class="product-sizes">
-                            <span class="size-option">P</span>
-                            <span class="size-option">M</span>
-                            <span class="size-option selected">G</span>
-                        </div>
-                        
-                        <button class="btn btn-buy" onclick="buyProduct('Body Renda Transpassado', 89.90)">Comprar</button>
-                    </div>
-                </div>
-                
-                <!-- Produto 5 -->
-                <div class="product-card">
-                    <div class="product-image">
-                        <img src="https://images.unsplash.com/photo-1551845041-9f5b9b3b8f6d?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Pijama curto">
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-title">Pijama Short em Cetim</h3>
-                        <div class="product-price">R$ 79,90</div>
-                        <p class="product-description">Conjunto de pijama em cetim com camisola e short, perfeito para noites confortáveis.</p>
-                        
-                        <div class="product-sizes">
-                            <span class="size-option selected">Único</span>
-                        </div>
-                        
-                        <button class="btn btn-buy" onclick="buyProduct('Pijama Short em Cetim', 79.90)">Comprar</button>
-                    </div>
-                </div>
-                
-                <!-- Produto 6 -->
-                <div class="product-card">
-                    <div class="product-image">
-                        <img src="https://images.unsplash.com/photo-1551845041-9f5b9b3b8f6d?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Cinta modeladora">
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-title">Cinta Modeladora</h3>
-                        <div class="product-price">R$ 99,90</div>
-                        <p class="product-description">Cinta modeladora com cós alto, proporcionando silhueta marcante com conforto.</p>
-                        
-                        <div class="product-sizes">
-                            <span class="size-option">P</span>
-                            <span class="size-option selected">M</span>
-                            <span class="size-option">G</span>
-                        </div>
-                        
-                        <button class="btn btn-buy" onclick="buyProduct('Cinta Modeladora', 99.90)">Comprar</button>
-                    </div>
-                </div>
+            <div class="products" id="productsContainer">
+                <!-- Produtos serão carregados dinamicamente via JavaScript -->
             </div>
         </section>
         
         <section id="about">
             <h2 class="section-title">Sobre Nós</h2>
             <div style="background-color: white; padding: 2rem; border-radius: 10px; box-shadow: 0 3px 10px rgba(0,0,0,0.1);">
-                <p>A Lovelly Closet nasceu da paixão por moda íntima que combina conforto, qualidade e sensualidade. Nossa missão é empoderar mulheres através de peças que valorizam sua beleza e autoestima.</p>
-                <p style="margin-top: 1rem;">Trabalhamos apenas com materiais de alta qualidade e fornecedores comprometidos com a excelência, garantindo que cada peça seja uma experiência única de conforto e sofisticação.</p>
+                <p id="aboutText">A Lovelly Closet nasceu da paixão por moda íntima que combina conforto, qualidade e sensualidade. Nossa missão é empoderar mulheres através de peças que valorizam sua beleza e autoestima.</p>
+                <p style="margin-top: 1rem;" id="aboutText2">Trabalhamos apenas com materiais de alta qualidade e fornecedores comprometidos com a excelência, garantindo que cada peça seja uma experiência única de conforto e sofisticação.</p>
             </div>
         </section>
         
@@ -515,25 +571,424 @@
         <i class="fab fa-whatsapp"></i>
     </a>
     
+    <!-- Modal de Administração -->
+    <div id="adminModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeModal">&times;</span>
+            <h2>Painel de Administração</h2>
+            
+            <div class="admin-panel">
+                <div class="admin-section">
+                    <h3>Configurações Gerais</h3>
+                    <div class="form-group">
+                        <label for="siteTitle">Título do Site</label>
+                        <input type="text" id="siteTitle" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="siteSlogan">Slogan</label>
+                        <input type="text" id="siteSlogan" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="whatsappNumber">Número do WhatsApp (com código do país)</label>
+                        <input type="text" id="whatsappNumber" class="form-control" placeholder="5511999999999">
+                    </div>
+                    <button class="btn btn-admin" onclick="saveSettings()">Salvar Configurações</button>
+                </div>
+                
+                <div class="admin-section">
+                    <h3>Texto Sobre Nós</h3>
+                    <div class="form-group">
+                        <label for="aboutText1">Primeiro Parágrafo</label>
+                        <textarea id="aboutText1" class="form-control"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="aboutText2">Segundo Parágrafo</label>
+                        <textarea id="aboutText2" class="form-control"></textarea>
+                    </div>
+                    <button class="btn btn-admin" onclick="saveAboutText()">Salvar Texto</button>
+                </div>
+                
+                <div class="admin-section">
+                    <h3>Promoções</h3>
+                    <div class="form-group">
+                        <label for="promoActive">Ativar Promoção</label>
+                        <input type="checkbox" id="promoActive" class="form-control" style="width: auto;">
+                    </div>
+                    <div class="form-group">
+                        <label for="promoText">Texto da Promoção</label>
+                        <input type="text" id="promoTextInput" class="form-control" placeholder="Ex: Black Friday - 50% OFF em toda loja!">
+                    </div>
+                    <button class="btn btn-admin" onclick="savePromo()">Salvar Promoção</button>
+                </div>
+                
+                <div class="admin-section">
+                    <h3>Gerenciar Produtos</h3>
+                    <button class="btn btn-admin" onclick="showAddProductForm()"><i class="fas fa-plus"></i> Adicionar Produto</button>
+                    
+                    <div id="addProductForm" style="display: none; margin-top: 1.5rem;">
+                        <div class="form-group">
+                            <label for="productName">Nome do Produto</label>
+                            <input type="text" id="productName" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="productPrice">Preço (R$)</label>
+                            <input type="number" id="productPrice" class="form-control" step="0.01">
+                        </div>
+                        <div class="form-group">
+                            <label for="productOldPrice">Preço Antigo (R$) - Opcional para promoções</label>
+                            <input type="number" id="productOldPrice" class="form-control" step="0.01">
+                        </div>
+                        <div class="form-group">
+                            <label for="productDescription">Descrição</label>
+                            <textarea id="productDescription" class="form-control"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="productSizes">Tamanhos (separados por vírgula)</label>
+                            <input type="text" id="productSizes" class="form-control" placeholder="Ex: P,M,G,GG">
+                        </div>
+                        <div class="form-group">
+                            <label for="productImage">URL da Imagem</label>
+                            <input type="text" id="productImage" class="form-control" placeholder="Cole a URL da imagem aqui">
+                        </div>
+                        <div class="form-group">
+                            <label for="productTag">Tag (Ex: "Novo", "Promoção") - Opcional</label>
+                            <input type="text" id="productTag" class="form-control">
+                        </div>
+                        <button class="btn btn-admin" onclick="addProduct()">Adicionar Produto</button>
+                    </div>
+                    
+                    <h4 style="margin-top: 1.5rem;">Produtos Cadastrados</h4>
+                    <ul class="product-list" id="productList">
+                        <!-- Produtos serão listados aqui -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
     <script>
-        // Função para redirecionar para o WhatsApp
+        // Dados iniciais (serão substituídos pelo LocalStorage se existirem)
+        let storeData = {
+            settings: {
+                title: "Lovelly Closet",
+                slogan: "Conforto e elegância para você",
+                whatsapp: "5511999999999"
+            },
+            about: {
+                text1: "A Lovelly Closet nasceu da paixão por moda íntima que combina conforto, qualidade e sensualidade. Nossa missão é empoderar mulheres através de peças que valorizam sua beleza e autoestima.",
+                text2: "Trabalhamos apenas com materiais de alta qualidade e fornecedores comprometidos com a excelência, garantindo que cada peça seja uma experiência única de conforto e sofisticação."
+            },
+            promo: {
+                active: false,
+                text: ""
+            },
+            products: [
+                {
+                    id: 1,
+                    name: "Calcinha Renda Florais",
+                    price: 39.90,
+                    oldPrice: 0,
+                    description: "Calcinha em renda com detalhes florais, extremamente confortável e sensual.",
+                    sizes: ["P", "M", "G", "GG"],
+                    image: "https://images.unsplash.com/photo-1591348278863-a8fb3887e2aa?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80",
+                    tag: ""
+                },
+                {
+                    id: 2,
+                    name: "Sutiã com Bojo",
+                    price: 69.90,
+                    oldPrice: 0,
+                    description: "Sutiã com bojo e alças ajustáveis, proporcionando conforto e sustentação.",
+                    sizes: ["34", "36", "38", "40"],
+                    image: "https://images.unsplash.com/photo-1585487000160-6ebcfceb0d03?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80",
+                    tag: ""
+                },
+                {
+                    id: 3,
+                    name: "Conjunto Sensual",
+                    price: 119.90,
+                    oldPrice: 149.90,
+                    description: "Conjunto completo com sutiã e calcinha em renda, perfeito para ocasiões especiais.",
+                    sizes: ["P", "M", "G"],
+                    image: "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80",
+                    tag: "Promoção"
+                }
+            ]
+        };
+        
+        // Carrega dados do LocalStorage ao iniciar
+        function loadData() {
+            const savedData = localStorage.getItem('lovellyClosetData');
+            if (savedData) {
+                storeData = JSON.parse(savedData);
+            }
+            renderAll();
+        }
+        
+        // Salva dados no LocalStorage
+        function saveData() {
+            localStorage.setItem('lovellyClosetData', JSON.stringify(storeData));
+        }
+        
+        // Renderiza tudo na página
+        function renderAll() {
+            renderSettings();
+            renderAbout();
+            renderPromo();
+            renderProducts();
+            renderProductList();
+        }
+        
+        // Renderiza as configurações
+        function renderSettings() {
+            document.querySelector('.logo').textContent = storeData.settings.title;
+            document.querySelector('.slogan').textContent = storeData.settings.slogan;
+            document.getElementById('heroTitle').textContent = `Coleção ${new Date().getFullYear()}`;
+            document.getElementById('whatsappNumber').value = storeData.settings.whatsapp;
+            
+            // Atualiza todos os links do WhatsApp
+            document.querySelectorAll('[href^="https://wa.me/"]').forEach(link => {
+                link.href = `https://wa.me/${storeData.settings.whatsapp}`;
+            });
+        }
+        
+        // Renderiza o texto sobre nós
+        function renderAbout() {
+            document.getElementById('aboutText').textContent = storeData.about.text1;
+            document.getElementById('aboutText2').textContent = storeData.about.text2;
+            document.getElementById('aboutText1').value = storeData.about.text1;
+            document.getElementById('aboutText2').value = storeData.about.text2;
+        }
+        
+        // Renderiza a promoção
+        function renderPromo() {
+            const promoBanner = document.getElementById('promoBanner');
+            const promoText = document.getElementById('promoText');
+            
+            if (storeData.promo.active && storeData.promo.text) {
+                promoBanner.style.display = 'block';
+                promoText.textContent = storeData.promo.text;
+                document.getElementById('promoActive').checked = true;
+                document.getElementById('promoTextInput').value = storeData.promo.text;
+            } else {
+                promoBanner.style.display = 'none';
+                document.getElementById('promoActive').checked = false;
+                document.getElementById('promoTextInput').value = '';
+            }
+        }
+        
+        // Renderiza os produtos
+        function renderProducts() {
+            const container = document.getElementById('productsContainer');
+            container.innerHTML = '';
+            
+            storeData.products.forEach(product => {
+                const sizesHtml = product.sizes.map(size => 
+                    `<span class="size-option ${size === 'M' ? 'selected' : ''}">${size}</span>`
+                ).join('');
+                
+                const oldPriceHtml = product.oldPrice > 0 ? 
+                    `<span class="product-old-price">R$ ${product.oldPrice.toFixed(2)}</span>` : '';
+                
+                const tagHtml = product.tag ? 
+                    `<span class="product-badge">${product.tag}</span>` : '';
+                
+                container.innerHTML += `
+                    <div class="product-card">
+                        ${tagHtml}
+                        <div class="product-image">
+                            <img src="${product.image}" alt="${product.name}">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">${product.name}</h3>
+                            <div class="product-price">
+                                ${oldPriceHtml}
+                                R$ ${product.price.toFixed(2)}
+                            </div>
+                            <p class="product-description">${product.description}</p>
+                            
+                            <div class="product-sizes">
+                                ${sizesHtml}
+                            </div>
+                            
+                            <button class="btn btn-buy" onclick="buyProduct('${product.name}', ${product.price})">Comprar</button>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+        
+        // Renderiza a lista de produtos no painel admin
+        function renderProductList() {
+            const list = document.getElementById('productList');
+            list.innerHTML = '';
+            
+            storeData.products.forEach(product => {
+                const li = document.createElement('li');
+                li.className = 'product-list-item';
+                li.innerHTML = `
+                    <div>
+                        <strong>${product.name}</strong> - R$ ${product.price.toFixed(2)}
+                        ${product.tag ? `<span style="margin-left: 10px; background: #f0f0f0; padding: 2px 5px; border-radius: 3px;">${product.tag}</span>` : ''}
+                    </div>
+                    <div class="product-list-actions">
+                        <button class="btn-edit" onclick="editProduct(${product.id})"><i class="fas fa-edit"></i></button>
+                        <button class="btn-delete" onclick="deleteProduct(${product.id})"><i class="fas fa-trash"></i></button>
+                    </div>
+                `;
+                list.appendChild(li);
+            });
+        }
+        
+        // Função para comprar produto (redireciona para WhatsApp)
         function buyProduct(productName, price) {
-            const phoneNumber = "5511999999999"; // Substitua pelo seu número de WhatsApp
-            const message = `Olá Lovelly Closet! Gostaria de comprar o produto: ${productName} no valor de R$ ${price.toFixed(2)}. Por favor, me informe as formas de pagamento e prazo de entrega.`;
-            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+            const message = `Olá ${storeData.settings.title}! Gostaria de comprar o produto: ${productName} no valor de R$ ${price.toFixed(2)}. Por favor, me informe as formas de pagamento e prazo de entrega.`;
+            const whatsappUrl = `https://wa.me/${storeData.settings.whatsapp}?text=${encodeURIComponent(message)}`;
             window.open(whatsappUrl, '_blank');
         }
         
-        // Selecionar tamanhos
-        document.querySelectorAll('.size-option').forEach(option => {
-            option.addEventListener('click', function() {
-                // Remove a classe 'selected' de todos os tamanhos no mesmo grupo
-                this.parentNode.querySelectorAll('.size-option').forEach(el => {
-                    el.classList.remove('selected');
-                });
+        // Funções do painel admin
+        function openAdminModal() {
+            document.getElementById('adminModal').style.display = 'block';
+            document.getElementById('siteTitle').value = storeData.settings.title;
+            document.getElementById('siteSlogan').value = storeData.settings.slogan;
+        }
+        
+        function closeAdminModal() {
+            document.getElementById('adminModal').style.display = 'none';
+        }
+        
+        function saveSettings() {
+            storeData.settings.title = document.getElementById('siteTitle').value;
+            storeData.settings.slogan = document.getElementById('siteSlogan').value;
+            storeData.settings.whatsapp = document.getElementById('whatsappNumber').value;
+            
+            saveData();
+            renderAll();
+            alert('Configurações salvas com sucesso!');
+        }
+        
+        function saveAboutText() {
+            storeData.about.text1 = document.getElementById('aboutText1').value;
+            storeData.about.text2 = document.getElementById('aboutText2').value;
+            
+            saveData();
+            renderAbout();
+            alert('Texto sobre nós salvo com sucesso!');
+        }
+        
+        function savePromo() {
+            storeData.promo.active = document.getElementById('promoActive').checked;
+            storeData.promo.text = document.getElementById('promoTextInput').value;
+            
+            saveData();
+            renderPromo();
+            alert('Promoção salva com sucesso!');
+        }
+        
+        function showAddProductForm() {
+            document.getElementById('addProductForm').style.display = 'block';
+        }
+        
+        function addProduct() {
+            const newProduct = {
+                id: storeData.products.length > 0 ? Math.max(...storeData.products.map(p => p.id)) + 1 : 1,
+                name: document.getElementById('productName').value,
+                price: parseFloat(document.getElementById('productPrice').value),
+                oldPrice: parseFloat(document.getElementById('productOldPrice').value) || 0,
+                description: document.getElementById('productDescription').value,
+                sizes: document.getElementById('productSizes').value.split(',').map(s => s.trim()),
+                image: document.getElementById('productImage').value,
+                tag: document.getElementById('productTag').value
+            };
+            
+            storeData.products.push(newProduct);
+            saveData();
+            renderProducts();
+            renderProductList();
+            
+            // Limpa o formulário
+            document.getElementById('addProductForm').reset();
+            document.getElementById('addProductForm').style.display = 'none';
+            
+            alert('Produto adicionado com sucesso!');
+        }
+        
+        function editProduct(id) {
+            const product = storeData.products.find(p => p.id === id);
+            if (!product) return;
+            
+            if (confirm(`Editar produto "${product.name}"?`)) {
+                const newName = prompt("Nome do produto:", product.name);
+                if (newName === null) return;
                 
-                // Adiciona a classe 'selected' apenas ao tamanho clicado
-                this.classList.add('selected');
+                const newPrice = prompt("Preço do produto:", product.price);
+                if (newPrice === null) return;
+                
+                const newOldPrice = prompt("Preço antigo (deixe em branco se não houver):", product.oldPrice || '');
+                
+                const newDescription = prompt("Descrição do produto:", product.description);
+                if (newDescription === null) return;
+                
+                const newSizes = prompt("Tamanhos disponíveis (separados por vírgula):", product.sizes.join(', '));
+                if (newSizes === null) return;
+                
+                const newImage = prompt("URL da imagem do produto:", product.image);
+                if (newImage === null) return;
+                
+                const newTag = prompt("Tag do produto (ex: 'Novo', 'Promoção' - deixe em branco se não houver):", product.tag || '');
+                
+                product.name = newName;
+                product.price = parseFloat(newPrice);
+                product.oldPrice = newOldPrice ? parseFloat(newOldPrice) : 0;
+                product.description = newDescription;
+                product.sizes = newSizes.split(',').map(s => s.trim());
+                product.image = newImage;
+                product.tag = newTag;
+                
+                saveData();
+                renderProducts();
+                renderProductList();
+                alert('Produto atualizado com sucesso!');
+            }
+        }
+        
+        function deleteProduct(id) {
+            if (confirm('Tem certeza que deseja excluir este produto?')) {
+                storeData.products = storeData.products.filter(p => p.id !== id);
+                saveData();
+                renderProducts();
+                renderProductList();
+                alert('Produto excluído com sucesso!');
+            }
+        }
+        
+        // Event Listeners
+        document.getElementById('adminBadge').addEventListener('click', openAdminModal);
+        document.getElementById('closeModal').addEventListener('click', closeAdminModal);
+        
+        // Fechar modal ao clicar fora
+        window.addEventListener('click', function(event) {
+            if (event.target === document.getElementById('adminModal')) {
+                closeAdminModal();
+            }
+        });
+        
+        // Inicializa a página
+        document.addEventListener('DOMContentLoaded', function() {
+            loadData();
+            
+            // Selecionar tamanhos
+            document.addEventListener('click', function(e) {
+                if (e.target.classList.contains('size-option')) {
+                    // Remove a classe 'selected' de todos os tamanhos no mesmo grupo
+                    e.target.parentNode.querySelectorAll('.size-option').forEach(el => {
+                        el.classList.remove('selected');
+                    });
+                    
+                    // Adiciona a classe 'selected' apenas ao tamanho clicado
+                    e.target.classList.add('selected');
+                }
             });
         });
     </script>
