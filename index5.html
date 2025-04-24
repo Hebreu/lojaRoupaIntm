@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lovelly Closet - Roupas Íntimas Femininas</title>
+    <style>
+        :root {
+            --primary-color: #ff66b2;
+            --secondary-color: #ff99cc;
+            --dark-color: #cc0066;
+            --light-color: #ffe6f2;
+            --text-color: #333;
+            --white: #ffffff;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', Arial, sans-serif;
+            color: var(--text-color);
+            background-color: var(--light-color);
+            line-height: 1.6;
+        }
+        
+        header {
+            background: linear-gradient(to right, var(--primary-color), var(--dark-color));
+            color: var(--white);
+            padding: 1rem 0;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .slogan {
+            font-style: italic;
+            font-size: 0.9rem;
+        }
+        
+        nav {
+            background-color: var(--white);
+            padding: 0.5rem 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin: 0 1rem;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: var(--dark-color);
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        nav ul li a:hover {
+            background-color: var(--secondary-color);
+            color: var(--white);
+        }
+        
+        .hero {
+            background-image: url('https://images.unsplash.com/photo-1551232864-3f0890e580d9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+            position: relative;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.4);
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            padding: 2rem;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: var(--dark-color);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--dark-color);
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background-color: var(--primary-color);
+        }
+        
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .product-card {
+            background-color: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .product-image {
+            height: 300px;
+            overflow: hidden;
+        }
+        
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .product-card:hover .product-image img {
+            transform: scale(1.05);
+        }
+        
+        .product-info {
+            padding: 1.5rem;
+        }
+        
+        .product-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark-color);
+        }
+        
+        .product-price {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .product-description {
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            color: #666;
+        }
+        
+        .product-sizes {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .size-option {
+            padding: 0.3rem 0.6rem;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .size-option:hover {
+            background-color: var(--secondary-color);
+            color: var(--white);
+            border-color: var(--secondary-color);
+        }
+        
+        .size-option.selected {
+            background-color: var(--primary-color);
+            color: var(--white);
+            border-color: var(--primary-color);
+        }
+        
+        footer {
+            background: linear-gradient(to right, var(--primary-color), var(--dark-color));
+            color: var(--white);
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .social-links {
+            margin: 1rem 0;
+        }
+        
+        .social-links a {
+            color: var(--white);
+            margin: 0 0.5rem;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            color: var(--light-color);
+            transform: translateY(-3px);
+        }
+        
+        .whatsapp-float {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background-color: #25D366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            z-index: 100;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+        
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav ul li {
+                margin: 0.5rem 0;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .products {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="logo">Lovelly Closet</div>
+        <div class="slogan">Conforto e elegância para você</div>
+    </header>
+    
+    <nav>
+        <ul>
+            <li><a href="#home">Início</a></li>
+            <li><a href="#products">Produtos</a></li>
+            <li><a href="#about">Sobre Nós</a></li>
+            <li><a href="#contact">Contato</a></li>
+        </ul>
+    </nav>
+    
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Coleção Primavera/Verão 2023</h1>
+            <p>Descubra as peças mais confortáveis e sensuais para realçar sua beleza</p>
+            <a href="#products" class="btn">Ver Coleção</a>
+        </div>
+    </section>
+    
+    <div class="container">
+        <section id="products">
+            <h2 class="section-title">Nossos Produtos</h2>
+            
+            <div class="products">
+                <!-- Produto 1 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1591348278863-a8fb3887e2aa?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Calcinha rendada">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Calcinha Renda Florais</h3>
+                        <div class="product-price">R$ 39,90</div>
+                        <p class="product-description">Calcinha em renda com detalhes florais, extremamente confortável e sensual.</p>
+                        
+                        <div class="product-sizes">
+                            <span class="size-option">P</span>
+                            <span class="size-option">M</span>
+                            <span class="size-option selected">G</span>
+                            <span class="size-option">GG</span>
+                        </div>
+                        
+                        <button class="btn btn-buy" onclick="buyProduct('Calcinha Renda Florais', 39.90)">Comprar</button>
+                    </div>
+                </div>
+                
+                <!-- Produto 2 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1585487000160-6ebcfceb0d03?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Sutiã com bojo">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Sutiã com Bojo</h3>
+                        <div class="product-price">R$ 69,90</div>
+                        <p class="product-description">Sutiã com bojo e alças ajustáveis, proporcionando conforto e sustentação.</p>
+                        
+                        <div class="product-sizes">
+                            <span class="size-option">34</span>
+                            <span class="size-option selected">36</span>
+                            <span class="size-option">38</span>
+                            <span class="size-option">40</span>
+                        </div>
+                        
+                        <button class="btn btn-buy" onclick="buyProduct('Sutiã com Bojo', 69.90)">Comprar</button>
+                    </div>
+                </div>
+                
+                <!-- Produto 3 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Conjunto lingerie">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Conjunto Sensual</h3>
+                        <div class="product-price">R$ 119,90</div>
+                        <p class="product-description">Conjunto completo com sutiã e calcinha em renda, perfeito para ocasiões especiais.</p>
+                        
+                        <div class="product-sizes">
+                            <span class="size-option">P</span>
+                            <span class="size-option selected">M</span>
+                            <span class="size-option">G</span>
+                        </div>
+                        
+                        <button class="btn btn-buy" onclick="buyProduct('Conjunto Sensual', 119.90)">Comprar</button>
+                    </div>
+                </div>
+                
+                <!-- Produto 4 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1551845041-5f0a5b5a0c9a?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Body rendado">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Body Renda Transpassado</h3>
+                        <div class="product-price">R$ 89,90</div>
+                        <p class="product-description">Body em renda com detalhes transpassados, modelador e extremamente confortável.</p>
+                        
+                        <div class="product-sizes">
+                            <span class="size-option">P</span>
+                            <span class="size-option">M</span>
+                            <span class="size-option selected">G</span>
+                        </div>
+                        
+                        <button class="btn btn-buy" onclick="buyProduct('Body Renda Transpassado', 89.90)">Comprar</button>
+                    </div>
+                </div>
+                
+                <!-- Produto 5 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1551845041-9f5b9b3b8f6d?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Pijama curto">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Pijama Short em Cetim</h3>
+                        <div class="product-price">R$ 79,90</div>
+                        <p class="product-description">Conjunto de pijama em cetim com camisola e short, perfeito para noites confortáveis.</p>
+                        
+                        <div class="product-sizes">
+                            <span class="size-option selected">Único</span>
+                        </div>
+                        
+                        <button class="btn btn-buy" onclick="buyProduct('Pijama Short em Cetim', 79.90)">Comprar</button>
+                    </div>
+                </div>
+                
+                <!-- Produto 6 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://images.unsplash.com/photo-1551845041-9f5b9b3b8f6d?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Cinta modeladora">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Cinta Modeladora</h3>
+                        <div class="product-price">R$ 99,90</div>
+                        <p class="product-description">Cinta modeladora com cós alto, proporcionando silhueta marcante com conforto.</p>
+                        
+                        <div class="product-sizes">
+                            <span class="size-option">P</span>
+                            <span class="size-option selected">M</span>
+                            <span class="size-option">G</span>
+                        </div>
+                        
+                        <button class="btn btn-buy" onclick="buyProduct('Cinta Modeladora', 99.90)">Comprar</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="about">
+            <h2 class="section-title">Sobre Nós</h2>
+            <div style="background-color: white; padding: 2rem; border-radius: 10px; box-shadow: 0 3px 10px rgba(0,0,0,0.1);">
+                <p>A Lovelly Closet nasceu da paixão por moda íntima que combina conforto, qualidade e sensualidade. Nossa missão é empoderar mulheres através de peças que valorizam sua beleza e autoestima.</p>
+                <p style="margin-top: 1rem;">Trabalhamos apenas com materiais de alta qualidade e fornecedores comprometidos com a excelência, garantindo que cada peça seja uma experiência única de conforto e sofisticação.</p>
+            </div>
+        </section>
+        
+        <section id="contact" style="margin-top: 3rem;">
+            <h2 class="section-title">Contato</h2>
+            <div style="background-color: white; padding: 2rem; border-radius: 10px; box-shadow: 0 3px 10px rgba(0,0,0,0.1); text-align: center;">
+                <p>Entre em contato conosco para tirar dúvidas ou fazer pedidos especiais:</p>
+                <div style="margin-top: 1.5rem;">
+                    <a href="https://wa.me/5511999999999" class="btn" style="margin-right: 1rem;">
+                        <i class="fab fa-whatsapp"></i> WhatsApp
+                    </a>
+                    <a href="https://www.instagram.com/_lovelly_closet" class="btn" style="background-color: #E1306C;">
+                        <i class="fab fa-instagram"></i> Instagram
+                    </a>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <footer>
+        <div class="footer-content">
+            <div class="logo" style="margin-bottom: 1rem;">Lovelly Closet</div>
+            <div class="social-links">
+                <a href="https://www.instagram.com/_lovelly_closet"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.facebook.com"><i class="fab fa-facebook"></i></a>
+                <a href="https://wa.me/5511999999999"><i class="fab fa-whatsapp"></i></a>
+            </div>
+            <p style="font-size: 0.8rem; margin-top: 1rem;">&copy; 2023 Lovelly Closet. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+    
+    <a href="https://wa.me/5511999999999" class="whatsapp-float">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+    
+    <script>
+        // Função para redirecionar para o WhatsApp
+        function buyProduct(productName, price) {
+            const phoneNumber = "5511999999999"; // Substitua pelo seu número de WhatsApp
+            const message = `Olá Lovelly Closet! Gostaria de comprar o produto: ${productName} no valor de R$ ${price.toFixed(2)}. Por favor, me informe as formas de pagamento e prazo de entrega.`;
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+        }
+        
+        // Selecionar tamanhos
+        document.querySelectorAll('.size-option').forEach(option => {
+            option.addEventListener('click', function() {
+                // Remove a classe 'selected' de todos os tamanhos no mesmo grupo
+                this.parentNode.querySelectorAll('.size-option').forEach(el => {
+                    el.classList.remove('selected');
+                });
+                
+                // Adiciona a classe 'selected' apenas ao tamanho clicado
+                this.classList.add('selected');
+            });
+        });
+    </script>
+</body>
+</html>
